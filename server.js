@@ -2,21 +2,40 @@ var express = require('express');
 var path = require('path');
 var routes = require('./app/routes/index.js');
 var api = require('./app/api/apis.js');
+var mongodb = require('mongodb');
 
 require('dotenv').config({
-	silent:true
+	silent: true
 });
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+// db setup
+mongodb.MongoClient.connect(process.env.database || 'mongodb://localhost:27017/url-shortener', function(err, db) {
+	if (err)
+		throw err;
+	else
+		console.log('Connected to MongoDB');
 
-app.use('/', routes);
-app.use('/api', api);
+	app.db = db;
+	
+	// view engine setup
+	app.set('views', path.join(__dirname, 'views'));
+	app.set('view engine', 'pug');
 
-var port = process.env.port || 8080;
-app.listen(port, function() {
-	console.log("Now listening on port " + port);
+	// routes setup
+	app.use('/', routes);
+	app.use('/api', api);
+
+	db.createCollection("urls", {
+		capped: true,
+		size: 5242880,
+		max: 5000
+	});
+
+	var port = process.env.port || 8080;
+	var server = app.listen(port, function() {
+		console.log("Now listening on port " + port);
+	});
+
 });

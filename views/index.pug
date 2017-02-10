@@ -35,7 +35,7 @@ html.no-js
         h3 Example Output:
         code {"ipaddress":"::ffff:127.0.0.1","language":"en-US,en;q=0.5","software":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0"}
         //- Section Ends
-        br
+        hr
         //- Section Starts
         h2 Timestamp API
         p This is a small API that can take either a Unix timestamp or a natural language date (eg. February 2 2015) and will return both the Unix timestamp and natural language form of the string. This API idea was an exercise from 
@@ -46,6 +46,18 @@ html.no-js
             a(href='/api/timestamp/February 2 2015') #{timestampUrl}
         h3 Example Output:
         code {"unix":"1422788400","natural":"Feb 2, 2015"}
+        //- Section Ends
+        hr
+        //- Section Starts
+        h2 URL Shortener
+        p This is a small API that can take a URL and it will return a shortened URL that is stored in a database. This shortened URL will then redirect to the original URL specified. This API idea was an exercise from 
+            a(href="https://www.freecodecamp.com", target="_blank") freeCodeCamp.
+        h3 Example Usage:
+        code 
+            - var shortUrl = path + '/api/url/new/https://toashel.github.io/'
+            a(href='/api/url/new/https://toashel.github.io/') #{shortUrl}
+        h3 Example Output:
+        code {"original":"https://toashel.github.io/","short":"http://localhost:3000/api/url/zoometric-displeasureable-erne"}
         //- Section Ends
 
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
