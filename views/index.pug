@@ -30,13 +30,24 @@ html.no-js
             a(href="https://www.freecodecamp.com", target="_blank") freeCodeCamp.
         h3 Example Usage:
         code 
-            - var url = path
-            a(href='/api/me') #{path}
+            - var headerUrl = path + '/api/me'
+            a(href='/api/me') #{headerUrl}
         h3 Example Output:
         code {"ipaddress":"::ffff:127.0.0.1","language":"en-US,en;q=0.5","software":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:39.0) Gecko/20100101 Firefox/39.0"}
         //- Section Ends
+        br
+        //- Section Starts
+        h2 Timestamp API
+        p This is a small API that can take either a Unix timestamp or a natural language date (eg. February 2 2015) and will return both the Unix timestamp and natural language form of the string. This API idea was an exercise from 
+            a(href="https://www.freecodecamp.com", target="_blank") freeCodeCamp.
+        h3 Example Usage:
+        code 
+            - var timestampUrl = path + '/api/timestamp/February 2 2015'
+            a(href='/api/timestamp/February 2 2015') #{timestampUrl}
+        h3 Example Output:
+        code {"unix":"1422788400","natural":"Feb 2, 2015"}
+        //- Section Ends
 
-        
         script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
         script window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.0.min.js"><\/script>')
         //-script(src='javascripts/plugins.js')

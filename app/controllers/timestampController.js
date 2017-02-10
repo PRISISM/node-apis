@@ -1,22 +1,31 @@
+moment = require('moment');
+
 module.exports.handleGet = function(req, res) {
 	var d = req.params.str; // timestamp
 	var unixTime = null;
 	var naturalTime = null;
-	
-	if ( Object.prototype.toString.call(d) === "[object Date]" ) {
-	  // it is a date
-	  if ( isNaN( d.getTime() ) ) {  // d.valueOf() could also work
-	  	console.log(d);
-	    // date is not valid
-	  }
-	  else {
-	  	console.log(d);
-	  	res.json(d);
-	    // date is valid
-	  }
+
+	// Checking for unix time
+	if (+d >=0 ) {
+		unixTime = +d; // Using numerical representation
+		naturalTime = unixToNat(unixTime);
 	}
-	else {
-		console.log(d);
-	  // not a date
+
+	else if (moment(d, "MMMM D, YYYY").isValid()) {
+		unixTime = natToUnix(d);
+		naturalTime = unixToNat(unixTime);
 	}
+
+	var dateObj = {"unix" : unixTime, "natural": naturalTime};
+	res.json(dateObj);
 };
+
+/* Takes a natural date and returns a unix timestamp */
+function natToUnix(date) {
+	return moment(date, "MMM D, YYYY").format("X");
+}
+
+/* Takes a unix time and returns a natural date */
+function unixToNat(time) {
+	return moment.unix(time).format("MMM D, YYYY");
+}

@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.get('/', function(req, res) {
 	res.render('index', {
-		path: req.protocol + '://' + req.hostname + '/api/me'
+		path: req.protocol + '://' + req.hostname
 	});
 });
 
