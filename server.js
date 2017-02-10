@@ -33,7 +33,7 @@ mongodb.MongoClient.connect(process.env.database, function(err, db) {
 		max: 5000
 	});
 
-	var port = process.env.port || 8080;
+	var port = process.env.PORT || 8080;
 	var server = app.listen(port, function() {
 		console.log("Now listening on port " + port);
 	});
