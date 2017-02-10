@@ -11,14 +11,14 @@ require('dotenv').config({
 var app = express();
 
 // db setup
-mongodb.MongoClient.connect(process.env.database || 'mongodb://localhost:27017/url-shortener', function(err, db) {
+mongodb.MongoClient.connect(process.env.database, function(err, db) {
 	if (err)
 		throw err;
 	else
 		console.log('Connected to MongoDB');
 
 	app.db = db;
-	
+
 	// view engine setup
 	app.set('views', path.join(__dirname, 'views'));
 	app.set('view engine', 'pug');
